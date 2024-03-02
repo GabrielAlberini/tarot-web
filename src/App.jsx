@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import cards from "./db/cards.json";
+import "./App.css";
+import { CardDescription } from "./components/CardDescription/CardDescription";
 
 function App() {
   const [dataCards, setDataCards] = useState(cards);
+  const [notFound, setNotFound] = useState(false);
+  const searchInputRef = useRef(null);
 
   function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -17,10 +21,23 @@ function App() {
     );
   };
 
-  const handleChange = (e) => {
-    const search = e.target.value.toLowerCase();
-    const filteredCards = filterCards({ search });
-    setDataCards({ cards: filteredCards });
+  const handleChange = () => {
+    const search = searchInputRef.current.value.toLowerCase();
+    const prevSearch = searchInputRef.current.prevValue;
+
+    if (search !== prevSearch) {
+      const filteredCards = filterCards({ search });
+
+      if (filteredCards.length === 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
+      }
+
+      setDataCards({ cards: filteredCards });
+
+      searchInputRef.current.prevValue = search;
+    }
   };
 
   return (
@@ -30,16 +47,19 @@ function App() {
           <h1 className="title is-1 mt-6">Tarot Cards</h1>
           <div>
             <input
+              ref={searchInputRef}
               onChange={handleChange}
               type="text"
               className="input mb-3"
               placeholder="Search cards..."
             />
           </div>
-          <i style={{ color: "#a8a5a5" }}>
-            You can filter by name, type of arcane or card value
-          </i>
-          <section>
+          {!notFound && (
+            <i style={{ color: "#a8a5a5" }}>
+              You can filter by name, type of arcane or card value
+            </i>
+          )}
+          <section className="container-cards">
             {dataCards.cards.length > 0 ? (
               dataCards.cards.map((card) => (
                 <div
@@ -65,20 +85,12 @@ function App() {
                       <strong>Meaning reverse: </strong>
                       {card.meaning_rev}
                     </p>
-                    <p>
-                      <strong>Description:</strong> {card.desc}
-                    </p>
+                    <CardDescription description={card.desc} name={card.name} />
                   </div>
                 </div>
               ))
             ) : (
-              <h2
-                className="title is-4"
-                id="no-cards"
-                style={{ margin: "40px", textAlign: "center" }}
-              >
-                Card not found :(
-              </h2>
+              <i style={{ color: "#a8a5a5" }}>Card not found :(</i>
             )}
           </section>
         </section>
@@ -98,4 +110,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };
