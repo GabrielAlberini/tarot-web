@@ -51,11 +51,19 @@ function App() {
                 >
                   <div className="card-content">
                     <p className="title is-4">{card.name}</p>
-                    <p>
+                    <p className="pb-2">
                       <strong>Type:</strong> {capitalizeFirstLetter(card.type)}
                     </p>
                     <p>
                       <strong>Value:</strong> {card.value_int}
+                    </p>
+                    <p className="pb-2">
+                      <strong>Meaning up: </strong>
+                      {card.meaning_up}
+                    </p>
+                    <p className="pb-2">
+                      <strong>Meaning reverse: </strong>
+                      {card.meaning_rev}
                     </p>
                     <p>
                       <strong>Description:</strong> {card.desc}
