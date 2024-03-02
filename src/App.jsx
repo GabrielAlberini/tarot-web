@@ -54,7 +54,7 @@ function App() {
                     <p className="pb-2">
                       <strong>Type:</strong> {capitalizeFirstLetter(card.type)}
                     </p>
-                    <p>
+                    <p className="pb-2">
                       <strong>Value:</strong> {card.value_int}
                     </p>
                     <p className="pb-2">
