@@ -1,6 +1,5 @@
 import { useState } from "react";
 import cards from "./db/cards.json";
-import "bulma/css/bulma.css";
 
 function App() {
   const [dataCards, setDataCards] = useState(cards);
@@ -9,16 +8,18 @@ function App() {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  const handleChange = (e) => {
-    const search = e.target.value;
-
-    const filteredCards = cards.cards.filter(
+  const filterCards = ({ search }) => {
+    return cards.cards.filter(
       (card) =>
-        card.name.toLowerCase().includes(search.toLowerCase()) ||
-        card.type.toLowerCase().includes(search.toLowerCase()) ||
+        card.name.toLowerCase().includes(search) ||
+        card.type.toLowerCase().includes(search) ||
         card.value_int === +search
     );
+  };
 
+  const handleChange = (e) => {
+    const search = e.target.value.toLowerCase();
+    const filteredCards = filterCards({ search });
     setDataCards({ cards: filteredCards });
   };
 
@@ -26,7 +27,7 @@ function App() {
     <>
       <main className="mb-6 p-3">
         <section className="container">
-          <h1 className="title is-1 mt-6">Friendly Tarot</h1>
+          <h1 className="title is-1 mt-6">Tarot Cards</h1>
           <form>
             <input
               onChange={handleChange}
@@ -50,7 +51,7 @@ function App() {
                     <strong>Type:</strong> {capitalizeFirstLetter(card.type)}
                   </p>
                   <p>
-                    <strong>Value:</strong> {card.value}
+                    <strong>Value:</strong> {card.value_int}
                   </p>
                   <p>
                     <strong>Description:</strong> {card.desc}
