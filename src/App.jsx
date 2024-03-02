@@ -36,6 +36,9 @@ function App() {
               placeholder="Search cards..."
             />
           </form>
+          <i style={{ color: "#a8a5a5" }}>
+            You can filter by name, type of arcane or card value
+          </i>
           <section>
             {dataCards.cards.map((card) => (
               <div
