@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <main className="mb-6 p-3">
+      <main className="mb-6 p-3" style={{ minHeight: "100vh" }}>
         <section className="container">
           <h1 className="title is-1 mt-6">Tarot Cards</h1>
           <form>
@@ -40,28 +40,38 @@ function App() {
             You can filter by name, type of arcane or card value
           </i>
           <section>
-            {dataCards.cards.map((card) => (
-              <div
-                key={card.id}
-                className="card mt-5 single-card"
-                style={{
-                  minHeight: "300px",
-                }}
-              >
-                <div className="card-content">
-                  <p className="title is-4">{card.name}</p>
-                  <p>
-                    <strong>Type:</strong> {capitalizeFirstLetter(card.type)}
-                  </p>
-                  <p>
-                    <strong>Value:</strong> {card.value_int}
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {card.desc}
-                  </p>
+            {dataCards.cards.length > 0 ? (
+              dataCards.cards.map((card) => (
+                <div
+                  key={card.id}
+                  className="card mt-5 single-card"
+                  style={{
+                    minHeight: "300px",
+                  }}
+                >
+                  <div className="card-content">
+                    <p className="title is-4">{card.name}</p>
+                    <p>
+                      <strong>Type:</strong> {capitalizeFirstLetter(card.type)}
+                    </p>
+                    <p>
+                      <strong>Value:</strong> {card.value_int}
+                    </p>
+                    <p>
+                      <strong>Description:</strong> {card.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <h2
+                className="title is-4"
+                id="no-cards"
+                style={{ margin: "40px", textAlign: "center" }}
+              >
+                Card not found :(
+              </h2>
+            )}
           </section>
         </section>
       </main>
