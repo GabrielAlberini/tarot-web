@@ -19,7 +19,7 @@ const CardDescription = ({ name, description }) => {
       </button>
 
       {isVisible && (
-        <div className="modal is-active">
+        <div className="modal is-active p-4">
           <div className="modal-background" onClick={togglePopup}></div>
           <div className="modal-content">
             <div className="box">
