@@ -28,14 +28,14 @@ function App() {
       <main className="mb-6 p-3" style={{ minHeight: "100vh" }}>
         <section className="container">
           <h1 className="title is-1 mt-6">Tarot Cards</h1>
-          <form>
+          <div>
             <input
               onChange={handleChange}
               type="text"
               className="input mb-3"
               placeholder="Search cards..."
             />
-          </form>
+          </div>
           <i style={{ color: "#a8a5a5" }}>
             You can filter by name, type of arcane or card value
           </i>
