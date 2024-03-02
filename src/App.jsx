@@ -72,10 +72,10 @@ function App() {
                   <div className="card-content">
                     <p className="title is-4">{card.name}</p>
                     <p className="pb-2">
-                      <strong>Type:</strong> {capitalizeFirstLetter(card.type)}
+                      <strong>Value:</strong> {card.value_int}
                     </p>
                     <p className="pb-2">
-                      <strong>Value:</strong> {card.value_int}
+                      <strong>Type:</strong> {capitalizeFirstLetter(card.type)}
                     </p>
                     <p className="pb-2">
                       <strong>Meaning up: </strong>
